@@ -3,7 +3,6 @@ LABEL maintainer="Rishabh"
 
 ENV PYTHONUNBUFFERED 1 
 # This is to tell python to run in unbuffered mode which is recommended when running python within docker containers
-
 COPY ./requirements.txt /tmp/requirements.txt
 COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 COPY ./app /app
@@ -27,6 +26,8 @@ RUN python -m venv /py  && \
         --no-create-home \
         django-user
 
+# Set permissions for the django-user in the /app directory
+# USER root
+# RUN chown -R django-user /app
 ENV PATH="/py/bin:$PATH"
-
-USER django-user
+# USER django-user
